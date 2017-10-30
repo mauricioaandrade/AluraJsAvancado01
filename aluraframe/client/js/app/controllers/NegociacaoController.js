@@ -8,6 +8,7 @@ class NegociacaoController {
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
         this._listaNegociacoes = new ListaNegociacoes();
+        this._negociacoesView = new NegociacoesView($('#negociacoesView'));
     }
     _limpaFormulario() {
         this._inputData.value = '';
@@ -26,8 +27,10 @@ class NegociacaoController {
             //     .value.split('-')
             //     .map((item, indice) => item - indice % 2;)
             //);
+
         //2 - como array ano, mes, dia    
             //let data = new Date(this._inputData.value.split('-'));
+            
         //3 - como uma string com  ',' em vez de '-'
             //let data = new Date(this._inputData.value.replace(/-/g, ','));
             
@@ -53,5 +56,6 @@ class NegociacaoController {
 
         this._listaNegociacoes.adiciona(this._criaNegociacao());
         this._limpaFormulario();
+        this._negociacoesView.update(this._listaNegociacoes);
     }
 }
