@@ -7,8 +7,14 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+
         this._listaNegociacoes = new ListaNegociacoes();
         this._negociacoesView = new NegociacoesView($('#negociacoesView'));
+        this._negociacoesView.update(this._listaNegociacoes);
+
+        this._mensagem = new Mensagem();
+        this._mensagemView = new MensagemView($('#mensagemView'));
+        this._mensagemView.update(this._mensagem);
     }
     _limpaFormulario() {
         this._inputData.value = '';
@@ -30,7 +36,7 @@ class NegociacaoController {
 
         //2 - como array ano, mes, dia    
             //let data = new Date(this._inputData.value.split('-'));
-            
+
         //3 - como uma string com  ',' em vez de '-'
             //let data = new Date(this._inputData.value.replace(/-/g, ','));
             
@@ -52,10 +58,15 @@ class NegociacaoController {
     }            
 
     adiciona(event) {
+        
         event.preventDefault();
 
         this._listaNegociacoes.adiciona(this._criaNegociacao());
-        this._limpaFormulario();
         this._negociacoesView.update(this._listaNegociacoes);
+
+        this._mensagem.texto = 'Negociacao adicionada com sucesso';
+        this._mensagemView.update(this._mensagem);
+        
+        this._limpaFormulario();
     }
 }
